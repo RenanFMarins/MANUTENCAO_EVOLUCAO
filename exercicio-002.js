@@ -1,23 +1,16 @@
+function formatarInformacao(rotulo, ...partes) {
+    let informacaoFormatada = rotulo + ": ";
+    informacaoFormatada += partes
+        .filter(parte => parte)
+        .join(" ");
+    console.log(informacaoFormatada);
+}
+
 function exibirDetalhesUsuario(usuario) {
-    // Formatar e exibir nome completo
-    let nomeFormatado = "Nome: ";
-    if (usuario.titulo) {
-        nomeFormatado += usuario.titulo + " ";
-    }
-    nomeFormatado += usuario.primeiroNome + " " + usuario.ultimoNome;
-    console.log(nomeFormatado);
+    formatarInformacao("Nome", usuario.titulo, usuario.primeiroNome, usuario.ultimoNome);
 
-    // Formatar e exibir endereço
-    let enderecoFormatado = "Endereço: ";
-    if (usuario.tipoLogradouro) {
-        enderecoFormatado += usuario.tipoLogradouro + " ";
-    }
-
-    enderecoFormatado += usuario.logradouro + ", " + usuario.numero;
-    if (usuario.complemento) {
-        enderecoFormatado += " - " + usuario.complemento;
-    }
-    console.log(enderecoFormatado);
+    const enderecoPrincipal = `${usuario.tipoLogradouro || ""} ${usuario.logradouro}, ${usuario.numero}`;
+    formatarInformacao("Endereço", enderecoPrincipal.trim(), usuario.complemento);
 }
 
 const user = {
