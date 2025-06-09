@@ -1,8 +1,9 @@
-# modulo_a.py
-# from logger_simples import LoggerSimples # Supondo que está no mesmo diretório ou PYTHONPATH
+from exercicio_009.logger_singleton import LoggerSingleton
+
+
 class ModuloA:
     def __init__(self):
-        self.logger = LoggerSimples("modulo_a.log") # Instância própria
+        self.logger = LoggerSingleton.get_instance()
 
     def fazer_algo_importante(self):
         self.logger.log("info", "Módulo A: Algo importante aconteceu.")
