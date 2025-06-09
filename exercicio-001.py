@@ -1,14 +1,11 @@
-def calc(val, d, t_rate):
-    # val: valor do item
-    # d: desconto
-    # t_rate: taxa de juros
-    v_d = val - (val*d)
-    final = v_d + (v_d * t_rate)
-    return final
+def calcular_preco_final_item(preco_bruto, percentual_desconto, taxa_imposto):
+    preco_com_desconto = preco_bruto - (preco_bruto * percentual_desconto)
+    preco_final = preco_com_desconto + (preco_com_desconto * taxa_imposto)
+    return preco_final
 
 
-# exemplo de uso
-item_price = 100
-discount_val = 0.1
-tax = 0.05
-print(calc(item_price, discount_val, tax))
+preco_item = 100
+desconto = 0.1
+imposto = 0.05
+
+print(calcular_preco_final_item(preco_item, desconto, imposto))
