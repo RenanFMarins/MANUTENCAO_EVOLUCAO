@@ -4,11 +4,9 @@ def processar_pedidos_por_categoria(pedidos, categoria_alvo):
 
     for pedido in pedidos:
         print(f"\nProcessando Pedido ID: {pedido['id']}")
-        for item in pedido['itens']:
-            if item['categoria'] == categoria_alvo:
-                print(f"  → Encontrado: {item['nome_produto']} (R${item['preco']})")
-                produtos_encontrados.append(item['nome_produto'])
-                total_valor += item['preco']
+        produtos, subtotal = filtrar_itens_por_categoria(pedido, categoria_alvo)
+        produtos_encontrados.extend(produtos)
+        total_valor += subtotal
 
     print(f"\nTotal de produtos da categoria '{categoria_alvo}': {len(produtos_encontrados)}")
     print(f"Valor total: R${total_valor:.2f}")
@@ -16,7 +14,19 @@ def processar_pedidos_por_categoria(pedidos, categoria_alvo):
     return produtos_encontrados, total_valor
 
 
-# Exemplo de dados
+def filtrar_itens_por_categoria(pedido, categoria_alvo):
+    produtos = []
+    subtotal = 0
+
+    for item in pedido.get("itens", []):
+        if item.get("categoria") == categoria_alvo:
+            print(f"  → Encontrado: {item['nome_produto']} (R${item['preco']})")
+            produtos.append(item["nome_produto"])
+            subtotal += item["preco"]
+
+    return produtos, subtotal
+
+
 lista_pedidos = [
     {
         "id": "P001",
@@ -35,5 +45,4 @@ lista_pedidos = [
     }
 ]
 
-# Chamada
 processar_pedidos_por_categoria(lista_pedidos, "Eletrônicos")
