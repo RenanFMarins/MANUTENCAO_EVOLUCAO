@@ -1,8 +1,9 @@
-# modulo_b.py
-# from logger_simples import LoggerSimples
+from exercicio_009.logger_singleton import LoggerSingleton
+
+
 class ModuloB:
     def __init__(self):
-        self.logger = LoggerSimples("modulo_b.log") # Outra instância própria
+        self.logger = LoggerSingleton.get_instance()
 
     def outra_tarefa(self):
         self.logger.log("info", "Módulo B: Outra tarefa executada.")
